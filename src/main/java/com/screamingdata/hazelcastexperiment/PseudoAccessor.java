@@ -1,4 +1,4 @@
-package com.mycompany.hazelcastexperiment;
+package com.screamingdata.hazelcastexperiment;
 
  
 import com.hazelcast.client.ClientConfig;

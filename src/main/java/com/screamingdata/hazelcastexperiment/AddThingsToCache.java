@@ -1,4 +1,4 @@
-package com.mycompany.hazelcastexperiment;
+package com.screamingdata.hazelcastexperiment;
 
 
 import com.hazelcast.client.ClientConfig;
@@ -20,15 +20,15 @@ public class AddThingsToCache {
      
     public void addListData() {
         List<ObjectToCache> list = haz.getList("testlist");
-        for (int i = 0; i < 11000; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add(new ObjectToCache("example: " + i, "value" + i,i));
         }
     }
  
     public void addMapData() {
-        Map<Integer, ObjectToCache> map = haz.getMap("testmap");
-        for (int i = 0; i < 11000; i++) {
-            map.put(i, new ObjectToCache("example: " + i, "value" + i,i));
+        Map<String, ObjectToCache> map = haz.getMap("testmap");
+        for (int i = 0; i < 100; i++) {
+            map.put(Integer.toString(i), new ObjectToCache("example: " + i, "value" + i,i));
         }
     }
     
