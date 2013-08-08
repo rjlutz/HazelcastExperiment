@@ -11,7 +11,9 @@ import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
+import com.hazelcast.query.SqlPredicate;
 import java.util.Collection;
+import java.util.Set;
  
 public class QueryMap {
  
@@ -37,15 +39,18 @@ public class QueryMap {
         //EntryObject e = new PredicateBuilder().getEntryObject();
         //Predicate predicate = e.get("objectName").in("example: 1","example: 2","example: 4444").and(e.get("objectID").lessThan(4445));
         //Collection<ObjectToCache> objects = (Collection<ObjectToCache>) map.values(predicate);
+        
+        //Collection<ObjectToCache> objects = (Collection<ObjectToCache>) map.values(new SqlPredicate("objectID >= 0"));
+        //System.out.println("objects size =" + objects.size());
+        
+        
         Collection<ObjectToCache> objects = (Collection<ObjectToCache>) map.values();
         for(ObjectToCache o : objects ) {
             System.out.println("Map Query Result :" + o);
         }
         System.out.println("map size (should be 0) =" + map.size());
         
-        for (int i=0; i<100; i++) {
-            System.out.println("got: " + map.get(Integer.toString(i)));
-        }
+        CacheManagementUtilities.regenCache("testmap");  //force all persisted objs back into HC
         System.out.println("map size (should be 100) =" + map.size());
     }
  
